@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniScope | Advanced University Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Uni<span>Scope</span></div>
+            <div class="nav-links">
+                <span class="nav-item active">Explore</span>
+                <span class="nav-item" onclick="toggleProfileModal()">Student Profile</span>
+                <button class="compare-pill" onclick="showComparison()">
+                    <i class="fa fa-layer-group"></i> Compare
+                    <span id="compare-count" class="badge">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-bg-pattern"></div>
+        <div class="hero-content">
+            <span class="hero-tag">Verified 2024 Dataset</span>
+            <h1>University Intelligence <br><span>Simplified.</span></h1>
+            <p>Data-driven insights for competitive applicants. Explore the Top 100 Global Institutions.</p>
+            <div class="search-wrapper">
+                <i class="fa fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search by name, country, or program..." oninput="filterUniversities()">
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="filter-group">
+                <label><i class="fa fa-filter"></i> Filters</label>
+            </div>
+            
+            <div class="filter-section">
+                <label>Region</label>
+                <select id="countryFilter" onchange="filterUniversities()">
+                    <option value="all">Global (All)</option>
+                    <option value="USA">United States</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="Singapore">Singapore</option>
+                    <option value="Switzerland">Switzerland</option>
+                    <option value="China">China</option>
+                    <option value="Australia">Australia</option>
+                </select>
+            </div>
+
+            <div class="filter-section">
+                <div class="label-row">
+                    <label>Max Ranking</label>
+                    <span id="rankVal">100</span>
+                </div>
+                <input type="range" id="rankRange" min="1" max="100" value="100" oninput="filterUniversities()" class="modern-slider">
+            </div>
+
+            <div class="filter-section">
+                <label>Tuition Budget</label>
+                <select id="tuitionFilter" onchange="filterUniversities()">
+                    <option value="all">No Limit</option>
+                    <option value="low">Economic (< $30k)</option>
+                    <option value="mid">Mid-Range ($30k - $50k)</option>
+                    <option value="high">Premium (> $50k)</option>
+                </select>
+            </div>
+
+            <div id="activeProfileBox" class="profile-card" style="display:none">
+                <div class="profile-status-dot"></div>
+                <h4>Active Profile</h4>
+                <div id="profileStatsDisplay"></div>
+                <button onclick="toggleProfileModal()">Update Stats</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="results-toolbar">
+                <h3 id="resultsCount">Showing 100 Universities</h3>
+                <div class="sort-control">
+                    <label>Sort By</label>
+                    <select id="sortOptions" onchange="filterUniversities()">
+                        <option value="rank">Global Rank</option>
+                        <option value="difficulty">Difficulty Score</option>
+                        <option value="acceptance">Acceptance Rate</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="results-grid" id="universityGrid">
+                <!-- Data injected by JS -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="profileModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Student Profile</h2>
+                <button onclick="toggleProfileModal()" class="close-btn">&times;</button>
+            </div>
+            <p class="modal-desc">Unlock Match/Reach analytics based on your statistics.</p>
+            <div class="input-grid">
+                <div class="form-group">
+                    <label>Unweighted GPA</label>
+                    <input type="number" id="userGPA" step="0.01" min="0" max="4.0" placeholder="e.g. 3.85">
+                </div>
+                <div class="form-group">
+                    <label>SAT / ACT Score</label>
+                    <input type="number" id="userSAT" placeholder="e.g. 1520">
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-primary-action" onclick="saveProfile()">Apply Intelligence</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="detailsModal" class="modal-overlay">
+        <div class="modal-card wide" id="detailsContent"></div>
+    </div>
+
+    <div id="compareDrawer" class="compare-drawer">
+        <div class="drawer-header">
+            <h3><i class="fa fa-columns"></i> Side-by-Side Comparison</h3>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn-ghost" style="padding: 8px 15px;" onclick="clearComparison()">Clear All</button>
+                <button class="close-btn" onclick="closeComparison()">&times;</button>
+            </div>
+        </div>
+        <div id="comparisonTableWrapper" class="table-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
