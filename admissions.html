@@ -2,116 +2,153 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UniScope | Admissions Guide</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use the exact same fonts as your main page -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Link to YOUR custom CSS file -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Local styles just for the Admissions Grid to make it look great -->
     <style>
-        /* Unified SaaS Theme */
-        :root {
-            --bg-color: #f8fafc;
-            --text-color: #0f172a;
-            --card-bg: #ffffff;
-            --border-color: #e2e8f0;
-            --primary: #2563eb;
-            --primary-light: #eff6ff;
-            --secondary-text: #64748b;
+        .guide-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            padding-bottom: 60px;
         }
-
-        body { 
-            background-color: var(--bg-color); 
-            color: var(--text-color); 
-            transition: all 0.3s ease; 
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: -30px; /* Pulls cards slightly over the hero section */
+            position: relative;
+            z-index: 10;
         }
-        
-        .card { 
-            background-color: var(--card-bg); 
-            border: 1px solid var(--border-color); 
+        .guide-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 1px solid #eaeaea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
-        /* Smooth Animations */
-        .fade-in { animation: fadeIn 0.4s ease-in-out forwards; opacity: 0; }
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(10px); } 
-            to { opacity: 1; transform: translateY(0); } 
+        .guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background: #f0f6ff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #2563eb;
+            margin-bottom: 20px;
+        }
+        .guide-card h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.3rem;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+        .guide-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .guide-card li {
+            margin-bottom: 15px;
+            color: #4b5563;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .guide-card strong {
+            color: #111827;
+            display: block;
+            margin-bottom: 2px;
         }
     </style>
 </head>
-<body class="p-4 md:p-8 font-sans max-w-5xl mx-auto pb-24">
+<body>
 
-    <!-- Header with Back Button -->
-    <header class="mb-8 flex items-center gap-4 fade-in pt-2">
-        <a href="index.html" class="flex items-center justify-center w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm hover:bg-gray-50 transition-colors text-blue-600">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-        </a>
-        <div>
-            <h1 class="text-2xl md:text-3xl font-bold tracking-tight">Admissions Guide</h1>
-            <p class="text-sm md:text-base text-gray-500 mt-1">Everything you need to understand the university application process.</p>
+    <!-- EXACT SAME NAVBAR AS YOUR MAIN PAGE -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" style="cursor:pointer;" onclick="window.location.href='index.html'">Uni<span>Scope</span></div>
+            <div class="nav-links">
+                <!-- Links back to your main search page -->
+                <span class="nav-item" onclick="window.location.href='index.html'">Explore</span>
+                <!-- Keeps this tab active -->
+                <span class="nav-item active"><i class="fa fa-book" style="margin-right: 5px;"></i>Admissions Guide</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MINI HERO SECTION (Uses your style.css .hero class) -->
+    <header class="hero" style="padding: 60px 20px 100px 20px;">
+        <div class="hero-bg-pattern"></div>
+        <div class="hero-content">
+            <h1>Admissions <span>Guide</span></h1>
+            <p style="font-size: 1.1rem; opacity: 0.9; margin-top: 15px;">Everything you need to master the global university application process.</p>
         </div>
     </header>
 
-    <!-- Information Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- CONTENT GRID -->
+    <main class="guide-container">
+        <div class="guide-grid">
 
-        <!-- Card 1: Academic Calendar -->
-        <div class="card p-6 rounded-2xl shadow-sm fade-in delay-1">
-            <div class="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center text-2xl mb-4">📅</div>
-            <h2 class="text-xl font-bold mb-2">The Academic Calendar</h2>
-            <ul class="space-y-3 text-sm text-gray-600 leading-relaxed">
-                <li><strong class="text-gray-900">Study Year:</strong> Typically runs from September to May, though Australian and some Asian universities start in February or March.</li>
-                <li><strong class="text-gray-900">Semesters vs. Quarters:</strong> A semester system divides the year into two halves (Fall and Spring). A quarter/trimester system divides the year into three or four shorter, faster-paced terms.</li>
-                <li><strong class="text-gray-900">Credit Hours:</strong> The measurement of academic time. You usually need around 120 credits to graduate with a Bachelor's degree.</li>
-            </ul>
+            <!-- Card 1: Academic Calendar -->
+            <div class="guide-card">
+                <div class="icon-box"><i class="fa fa-calendar-alt"></i></div>
+                <h2>The Academic Calendar</h2>
+                <ul>
+                    <li><strong>Study Year</strong> Typically runs from September to May (Fall and Spring), though universities in Australia and some parts of Asia start their academic year in February.</li>
+                    <li><strong>Semesters vs. Quarters</strong> A semester system divides the year into two halves. A quarter system divides the year into three shorter, faster-paced 10-week terms.</li>
+                    <li><strong>Credit Hours</strong> The measurement of academic workload. You usually need around 120 credits to graduate with a standard Bachelor's degree.</li>
+                </ul>
+            </div>
+
+            <!-- Card 2: Financials -->
+            <div class="guide-card">
+                <div class="icon-box"><i class="fa fa-coins"></i></div>
+                <h2>Tuition & Financials</h2>
+                <ul>
+                    <li><strong>Tuition Fees</strong> The base cost of taking classes. International students often pay significantly higher tuition rates compared to domestic citizens.</li>
+                    <li><strong>Room & Board</strong> The cost of living in campus dormitories and eating at university dining halls. This usually adds $10,000–$20,000 per year to your total bill.</li>
+                    <li><strong>Financial Aid</strong> <em>Merit-based</em> scholarships are awarded for high grades. <em>Need-based</em> aid is awarded depending on your family's financial income.</li>
+                </ul>
+            </div>
+
+            <!-- Card 3: The Application Package -->
+            <div class="guide-card">
+                <div class="icon-box"><i class="fa fa-file-signature"></i></div>
+                <h2>The Application Package</h2>
+                <ul>
+                    <li><strong>Motivational Letter (Personal Statement)</strong> An essay written by you. It explains who you are, why you chose your major, and what makes you unique beyond your grades.</li>
+                    <li><strong>Recommendation Letters</strong> Confidential letters written by your high school teachers. They vouch for your work ethic, intellectual curiosity, and character.</li>
+                    <li><strong>Transcripts & Tests</strong> Your official high school report card showing your GPA or IB/A-Level predicted scores, alongside SAT/ACT or IELTS/TOEFL test scores.</li>
+                </ul>
+            </div>
+
+            <!-- Card 4: Rankings & Strategy -->
+            <div class="guide-card">
+                <div class="icon-box"><i class="fa fa-trophy"></i></div>
+                <h2>Rankings & Statistics</h2>
+                <ul>
+                    <li><strong>QS World Ranking</strong> A globally recognized ranking system based on academic reputation, employer reputation, and university research output.</li>
+                    <li><strong>Acceptance Rate</strong> The percentage of applicants who get accepted. For example, a 5% rate means only 5 out of 100 students are admitted (highly competitive).</li>
+                    <li><strong>"Fit" over Rank</strong> While rankings are a useful metric, finding a university with the right location, culture, and specific program is far more critical for your long-term success.</li>
+                </ul>
+            </div>
+
         </div>
-
-        <!-- Card 2: Financials -->
-        <div class="card p-6 rounded-2xl shadow-sm fade-in delay-1">
-            <div class="w-12 h-12 rounded-lg bg-green-50 flex items-center justify-center text-2xl mb-4">💰</div>
-            <h2 class="text-xl font-bold mb-2">Tuition & Financials</h2>
-            <ul class="space-y-3 text-sm text-gray-600 leading-relaxed">
-                <li><strong class="text-gray-900">Tuition Fees:</strong> The base cost of your classes. International students usually pay significantly higher tuition than domestic citizens.</li>
-                <li><strong class="text-gray-900">Room & Board:</strong> The cost of living in dormitories and eating at university dining halls. This is often an additional $10k–$20k per year.</li>
-                <li><strong class="text-gray-900">Scholarships:</strong> Merit-based (awarded for high grades/achievements) or Need-based (awarded based on your family's financial income).</li>
-            </ul>
-        </div>
-
-        <!-- Card 3: The Application Package -->
-        <div class="card p-6 rounded-2xl shadow-sm fade-in delay-2">
-            <div class="w-12 h-12 rounded-lg bg-purple-50 flex items-center justify-center text-2xl mb-4">✍️</div>
-            <h2 class="text-xl font-bold mb-2">The Application Package</h2>
-            <ul class="space-y-3 text-sm text-gray-600 leading-relaxed">
-                <li><strong class="text-gray-900">Motivational Letter (Personal Statement):</strong> An essay written by you. It explains who you are, why you want to study this major, and what makes you unique beyond your grades.</li>
-                <li><strong class="text-gray-900">Recommendation Letters:</strong> Confidential letters written by your teachers or counselors. They vouch for your work ethic, character, and academic potential.</li>
-                <li><strong class="text-gray-900">Transcripts:</strong> Your official high school report card showing your GPA (Grade Point Average) or IB/A-Level predicted scores.</li>
-            </ul>
-        </div>
-
-        <!-- Card 4: Rankings & Data -->
-        <div class="card p-6 rounded-2xl shadow-sm fade-in delay-2">
-            <div class="w-12 h-12 rounded-lg bg-orange-50 flex items-center justify-center text-2xl mb-4">🏆</div>
-            <h2 class="text-xl font-bold mb-2">Rankings & Statistics</h2>
-            <ul class="space-y-3 text-sm text-gray-600 leading-relaxed">
-                <li><strong class="text-gray-900">QS World Ranking:</strong> A globally recognized ranking system based on academic reputation, employer reputation, and research citations.</li>
-                <li><strong class="text-gray-900">Acceptance Rate:</strong> The percentage of applicants who get accepted. E.g., a 5% rate means only 5 out of 100 students are admitted (highly competitive).</li>
-                <li><strong class="text-gray-900">"Fit" over Rank:</strong> While rankings are useful, finding a university with the right location, culture, and specific program is far more important for your success.</li>
-            </ul>
-        </div>
-
-    </div>
-
-    <!-- Call to action -->
-    <div class="mt-8 bg-blue-50 border border-blue-100 rounded-2xl p-6 text-center fade-in delay-3">
-        <h3 class="text-lg font-bold text-blue-900 mb-2">Ready to find your dream school?</h3>
-        <p class="text-sm text-blue-700 mb-4">Use our live-search tool to explore data for top universities around the world.</p>
-        <a href="index.html" class="inline-block bg-blue-600 text-white font-bold py-3 px-6 rounded-xl shadow-md hover:bg-blue-700 transition-colors">
-            Start Searching
-        </a>
-    </div>
+    </main>
 
 </body>
 </html>
