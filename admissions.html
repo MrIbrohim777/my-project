@@ -3,152 +3,427 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniScope | Admissions Guide</title>
-    <!-- Use the exact same fonts as your main page -->
+    <title>UniScope | Student Knowledge Hub</title>
+    <!-- Your standard fonts and icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Link to YOUR custom CSS file -->
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Local styles just for the Admissions Grid to make it look great -->
+    <!-- Link to your main stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Hub Specific Styles -->
     <style>
-        .guide-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-            padding-bottom: 60px;
+        html {
+            scroll-behavior: smooth;
         }
-        .guide-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: -30px; /* Pulls cards slightly over the hero section */
+        
+        /* Dashboard Layout */
+        .hub-container {
+            display: flex;
+            max-width: 1300px;
+            margin: -40px auto 60px auto;
+            padding: 0 20px;
+            gap: 40px;
             position: relative;
             z-index: 10;
+            align-items: flex-start;
         }
-        .guide-card {
+
+        /* Sticky Navigation Sidebar */
+        .hub-sidebar {
+            width: 280px;
             background: #ffffff;
             border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            padding: 25px 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             border: 1px solid #eaeaea;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: sticky;
+            top: 100px; /* Sticks to the top when scrolling */
+            flex-shrink: 0;
         }
-        .guide-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        .hub-sidebar h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #111827;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f3f4f6;
         }
-        .icon-box {
-            width: 50px;
-            height: 50px;
-            background: #f0f6ff;
-            border-radius: 10px;
+        .hub-nav-link {
+            display: block;
+            padding: 10px 15px;
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        .hub-nav-link i {
+            width: 20px;
+            margin-right: 8px;
+            color: #9ca3af;
+            transition: color 0.2s ease;
+        }
+        .hub-nav-link:hover, .hub-nav-link.active {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+        .hub-nav-link:hover i, .hub-nav-link.active i {
+            color: #2563eb;
+        }
+
+        /* Main Content Area */
+        .hub-content {
+            flex-grow: 1;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid #eaeaea;
+        }
+
+        .hub-section {
+            margin-bottom: 60px;
+            padding-top: 40px; /* For anchor scrolling offset */
+            margin-top: -40px;
+        }
+
+        .hub-section-title {
+            font-size: 1.8rem;
+            color: #111827;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: #2563eb;
-            margin-bottom: 20px;
+            gap: 12px;
         }
-        .guide-card h2 {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.3rem;
-            color: #111827;
-            margin-bottom: 15px;
+
+        /* Grid Cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
-        .guide-card ul {
+        .info-card {
+            border: 1px solid #e5e7eb;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f9fafb;
+            transition: transform 0.2s;
+        }
+        .info-card:hover {
+            transform: translateY(-3px);
+            border-color: #bfdbfe;
+        }
+        .info-card h4 {
+            color: #1f2937;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        .info-card p {
+            color: #4b5563;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Expandable Blocks (Accordions) */
+        details {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        summary {
+            padding: 18px 20px;
+            font-weight: 600;
+            cursor: pointer;
             list-style: none;
-            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #1f2937;
         }
-        .guide-card li {
-            margin-bottom: 15px;
+        summary::-webkit-details-marker { display: none; }
+        summary:after {
+            content: '\f078'; /* FontAwesome chevron-down */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #9ca3af;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary:after {
+            transform: rotate(180deg);
+        }
+        .details-content {
+            padding: 0 20px 20px 20px;
             color: #4b5563;
             font-size: 0.95rem;
             line-height: 1.6;
         }
-        .guide-card strong {
-            color: #111827;
-            display: block;
-            margin-bottom: 2px;
+
+        /* Interactive Timeline */
+        .timeline {
+            position: relative;
+            border-left: 2px solid #e5e7eb;
+            margin-left: 20px;
+            padding-left: 30px;
+        }
+        .timeline-item {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -39px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            background: #2563eb;
+            border-radius: 50%;
+            border: 4px solid #eff6ff;
+        }
+        .timeline-date {
+            font-weight: 700;
+            color: #2563eb;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        /* Glossary Search */
+        .glossary-search {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .glossary-search:focus {
+            border-color: #2563eb;
+        }
+
+        @media (max-width: 900px) {
+            .hub-container {
+                flex-direction: column;
+            }
+            .hub-sidebar {
+                width: 100%;
+                position: static;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- EXACT SAME NAVBAR AS YOUR MAIN PAGE -->
+    <!-- EXACT NAVBAR -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo" style="cursor:pointer;" onclick="window.location.href='index.html'">Uni<span>Scope</span></div>
             <div class="nav-links">
-                <!-- Links back to your main search page -->
                 <span class="nav-item" onclick="window.location.href='index.html'">Explore</span>
-                <!-- Keeps this tab active -->
-                <span class="nav-item active"><i class="fa fa-book" style="margin-right: 5px;"></i>Admissions Guide</span>
+                <span class="nav-item active"><i class="fa fa-graduation-cap" style="margin-right: 5px;"></i> Student Hub</span>
+                <span class="nav-item" onclick="toggleProfileModal()">Student Profile</span>
+                <button class="compare-pill" onclick="showComparison()">
+                    <i class="fa fa-layer-group"></i> Compare
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- MINI HERO SECTION (Uses your style.css .hero class) -->
-    <header class="hero" style="padding: 60px 20px 100px 20px;">
+    <!-- HERO HEADER -->
+    <header class="hero" style="padding: 60px 20px 120px 20px;">
         <div class="hero-bg-pattern"></div>
         <div class="hero-content">
-            <h1>Admissions <span>Guide</span></h1>
-            <p style="font-size: 1.1rem; opacity: 0.9; margin-top: 15px;">Everything you need to master the global university application process.</p>
+            <span class="hero-tag">Complete Student Guide</span>
+            <h1>University Basics <span>Hub</span></h1>
+            <p style="font-size: 1.1rem; opacity: 0.9; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Your all-in-one educational roadmap. Understand admissions, financial aid, campus life, and everything in between.
+            </p>
         </div>
     </header>
 
-    <!-- CONTENT GRID -->
-    <main class="guide-container">
-        <div class="guide-grid">
+    <!-- DASHBOARD LAYOUT -->
+    <div class="hub-container">
+        
+        <!-- Sticky Sidebar Navigation -->
+        <aside class="hub-sidebar">
+            <h3>Knowledge Hub</h3>
+            <nav id="hubNav">
+                <a href="#basics" class="hub-nav-link active"><i class="fa fa-building-columns"></i> University Basics</a>
+                <a href="#cost" class="hub-nav-link"><i class="fa fa-money-bill-wave"></i> Tuition & Costs</a>
+                <a href="#application" class="hub-nav-link"><i class="fa fa-file-alt"></i> Application Process</a>
+                <a href="#essays" class="hub-nav-link"><i class="fa fa-pen-nib"></i> Essays & Statements</a>
+                <a href="#timeline" class="hub-nav-link"><i class="fa fa-route"></i> Roadmap Timeline</a>
+                <a href="#glossary" class="hub-nav-link"><i class="fa fa-spell-check"></i> Terminology Dict.</a>
+            </nav>
+        </aside>
 
-            <!-- Card 1: Academic Calendar -->
-            <div class="guide-card">
-                <div class="icon-box"><i class="fa fa-calendar-alt"></i></div>
-                <h2>The Academic Calendar</h2>
-                <ul>
-                    <li><strong>Study Year</strong> Typically runs from September to May (Fall and Spring), though universities in Australia and some parts of Asia start their academic year in February.</li>
-                    <li><strong>Semesters vs. Quarters</strong> A semester system divides the year into two halves. A quarter system divides the year into three shorter, faster-paced 10-week terms.</li>
-                    <li><strong>Credit Hours</strong> The measurement of academic workload. You usually need around 120 credits to graduate with a standard Bachelor's degree.</li>
-                </ul>
-            </div>
+        <!-- Main Content Chapters -->
+        <main class="hub-content">
 
-            <!-- Card 2: Financials -->
-            <div class="guide-card">
-                <div class="icon-box"><i class="fa fa-coins"></i></div>
-                <h2>Tuition & Financials</h2>
-                <ul>
-                    <li><strong>Tuition Fees</strong> The base cost of taking classes. International students often pay significantly higher tuition rates compared to domestic citizens.</li>
-                    <li><strong>Room & Board</strong> The cost of living in campus dormitories and eating at university dining halls. This usually adds $10,000–$20,000 per year to your total bill.</li>
-                    <li><strong>Financial Aid</strong> <em>Merit-based</em> scholarships are awarded for high grades. <em>Need-based</em> aid is awarded depending on your family's financial income.</li>
-                </ul>
-            </div>
+            <!-- SECTION 1: BASICS -->
+            <section id="basics" class="hub-section">
+                <h2 class="hub-section-title"><i class="fa fa-building-columns text-blue-600"></i> 1. University Basics</h2>
+                <p style="color: #4b5563; margin-bottom: 20px;">Understand the foundational concepts of higher education before building your application strategy.</p>
+                
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4>College vs. University</h4>
+                        <p>Colleges generally offer undergraduate degrees (Bachelor's), while Universities are larger institutions offering both undergraduate and graduate (Master's/PhD) programs with a heavy focus on research.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Public vs. Private</h4>
+                        <p>Public universities are funded by state governments, making them cheaper for in-state residents. Private universities rely on tuition and endowments, offering smaller class sizes but higher sticker prices.</p>
+                    </div>
+                </div>
+            </section>
 
-            <!-- Card 3: The Application Package -->
-            <div class="guide-card">
-                <div class="icon-box"><i class="fa fa-file-signature"></i></div>
-                <h2>The Application Package</h2>
-                <ul>
-                    <li><strong>Motivational Letter (Personal Statement)</strong> An essay written by you. It explains who you are, why you chose your major, and what makes you unique beyond your grades.</li>
-                    <li><strong>Recommendation Letters</strong> Confidential letters written by your high school teachers. They vouch for your work ethic, intellectual curiosity, and character.</li>
-                    <li><strong>Transcripts & Tests</strong> Your official high school report card showing your GPA or IB/A-Level predicted scores, alongside SAT/ACT or IELTS/TOEFL test scores.</li>
-                </ul>
-            </div>
+            <!-- SECTION 2: COSTS -->
+            <section id="cost" class="hub-section">
+                <h2 class="hub-section-title"><i class="fa fa-money-bill-wave text-green-600"></i> 2. Tuition & Cost of Attendance</h2>
+                <p style="color: #4b5563; margin-bottom: 20px;">"Cost of Attendance" (COA) is the total estimated cost for one year of college. It includes more than just your classes.</p>
+                
+                <!-- Expandable Blocks -->
+                <details>
+                    <summary>Direct Costs (Billed by the University)</summary>
+                    <div class="details-content">
+                        <strong>Tuition:</strong> The cost of your academic classes.<br><br>
+                        <strong>Room & Board:</strong> The cost of your dormitory room and campus meal plan.
+                    </div>
+                </details>
+                <details>
+                    <summary>Indirect Costs (Hidden Expenses)</summary>
+                    <div class="details-content">
+                        <strong>Books & Supplies:</strong> Textbooks and laptops (usually estimated at $1,200/year).<br><br>
+                        <strong>Personal Expenses:</strong> Laundry, transportation, winter clothing, and flights home.
+                    </div>
+                </details>
+            </section>
 
-            <!-- Card 4: Rankings & Strategy -->
-            <div class="guide-card">
-                <div class="icon-box"><i class="fa fa-trophy"></i></div>
-                <h2>Rankings & Statistics</h2>
-                <ul>
-                    <li><strong>QS World Ranking</strong> A globally recognized ranking system based on academic reputation, employer reputation, and university research output.</li>
-                    <li><strong>Acceptance Rate</strong> The percentage of applicants who get accepted. For example, a 5% rate means only 5 out of 100 students are admitted (highly competitive).</li>
-                    <li><strong>"Fit" over Rank</strong> While rankings are a useful metric, finding a university with the right location, culture, and specific program is far more critical for your long-term success.</li>
-                </ul>
-            </div>
+            <!-- SECTION 3: APPLICATION -->
+            <section id="application" class="hub-section">
+                <h2 class="hub-section-title"><i class="fa fa-file-alt text-purple-600"></i> 3. The Application Package</h2>
+                <p style="color: #4b5563; margin-bottom: 20px;">Admissions officers use a holistic review process. They don't just look at grades; they look at the whole package.</p>
+                
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h4><i class="fa fa-chart-line text-blue-500"></i> Transcripts & GPA</h4>
+                        <p>Your academic record from Grade 9-12. Universities check if you took challenging classes (AP, IB, Honors) rather than just taking easy classes for a perfect GPA.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fa fa-envelope-open-text text-blue-500"></i> Recommendations</h4>
+                        <p>Letters from two teachers and one counselor. You should ask teachers who know your work ethic and character, not just the ones who gave you an A+.</p>
+                    </div>
+                </div>
+            </section>
 
-        </div>
-    </main>
+            <!-- SECTION 4: ESSAYS -->
+            <section id="essays" class="hub-section">
+                <h2 class="hub-section-title"><i class="fa fa-pen-nib text-orange-500"></i> 4. Essays & Personal Statements</h2>
+                <p style="color: #4b5563; margin-bottom: 20px;">The personal statement is your chance to show the admissions committee your personality, values, and voice.</p>
+                
+                <details>
+                    <summary>Top 3 Essay Mistakes to Avoid</summary>
+                    <div class="details-content">
+                        1. <strong>The Resume Rehash:</strong> Do not just list your awards. They already have your resume. Tell a story about a specific moment.<br><br>
+                        2. <strong>Using Big Words Falsely:</strong> Do not use a thesaurus to sound "smart." Write in your authentic, 17-year-old voice.<br><br>
+                        3. <strong>The "Savior" Trip:</strong> Avoid writing cliché essays about how a 2-week volunteer trip completely changed your perspective on life. Focus on long-term, local impact.
+                    </div>
+                </details>
+            </section>
 
+            <!-- SECTION 5: TIMELINE ROADMAP -->
+            <section id="timeline" class="hub-section">
+                <h2 class="hub-section-title"><i class="fa fa-route text-red-500"></i> 5. High School Roadmap Timeline</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Grade 9 & 10 (Exploration)</div>
+                        <p style="color: #4b5563;">Focus on exploring interests. Join clubs, find what you are passionate about, and maintain strong foundational grades.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Grade 11 (Preparation)</div>
+                        <p style="color: #4b5563;">The most important academic year. Take leadership roles in your clubs, take SAT/ACT tests if required, and start building a balanced list of Reach, Target, and Safety schools.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Grade 12 - Autumn (Execution)</div>
+                        <p style="color: #4b5563;">Write personal statements, request recommendation letters early, and submit applications via Early Action or Early Decision.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6: GLOSSARY -->
+            <section id="glossary" class="hub-section">
+                <h2 class="hub-section-title"><i class="fa fa-spell-check text-indigo-500"></i> 6. Terminology Dictionary</h2>
+                <input type="text" id="glossarySearch" class="glossary-search" placeholder="Search a term (e.g., FAFSA, Rolling Admission)..." onkeyup="searchGlossary()">
+                
+                <div class="info-grid" id="glossaryGrid">
+                    <div class="info-card term-card">
+                        <h4>FAFSA</h4>
+                        <p>Free Application for Federal Student Aid. The official form US citizens fill out to determine financial aid eligibility.</p>
+                    </div>
+                    <div class="info-card term-card">
+                        <h4>Rolling Admission</h4>
+                        <p>A policy where a university reviews applications as they are received, rather than waiting for a hard deadline. Apply early!</p>
+                    </div>
+                    <div class="info-card term-card">
+                        <h4>Need-Blind</h4>
+                        <p>An admission policy where the university does not consider your financial situation when deciding whether to accept you.</p>
+                    </div>
+                    <div class="info-card term-card">
+                        <h4>Waitlist</h4>
+                        <p>You were not accepted or rejected. If accepted students choose not to attend, the university may offer their spot to you later in the summer.</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Script for Hub Interactivity -->
+    <script>
+        // Search Glossary Function
+        function searchGlossary() {
+            let input = document.getElementById('glossarySearch').value.toLowerCase();
+            let cards = document.getElementsByClassName('term-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let term = cards[i].getElementsByTagName('h4')[0].innerText.toLowerCase();
+                let definition = cards[i].getElementsByTagName('p')[0].innerText.toLowerCase();
+                
+                if (term.includes(input) || definition.includes(input)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // Highlight Active Sidebar Link on Scroll
+        window.addEventListener('scroll', () => {
+            let sections = document.querySelectorAll('.hub-section');
+            let navLinks = document.querySelectorAll('.hub-nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
